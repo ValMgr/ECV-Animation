@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;700&family=Squada+One&display=swap"
+        rel="stylesheet">
+    <title>Valentin Magry - Untitled</title>
+    <link rel="stylesheet" href="Assets/css/reset.css">
+    <link rel="stylesheet" href="Assets/css/animation.css">
+    <link rel="stylesheet" href="AssetS/css/style.css">
+</head>
+
+<body>
+
+    <section>
+
+        <div class="circle" id="homeCircle"></div>
+
+        <h1>Untitled</h1>
+
+        <button id="insertCoin">Insert Coin</button>
+
+        <div id="dropCoin">
+            <div class="coin" id="homeCoin">
+               <img src="Assets/img/coin/frame-1.svg" alt="coin frame 1" class="frame">
+               <img src="Assets/img/coin/frame-2.svg" alt="coin frame 2" class="frame">
+               <img src="Assets/img/coin/frame-3.svg" alt="coin frame 3" class="frame">
+               <img src="Assets/img/coin/frame-4.svg" alt="coin frame 4" class="frame">
+            </div>
+
+            <img id="homeFente" src="Assets/img/fente/fente.svg" alt="fente">
+        </div>
+
+
+    </section>
+
+    <section>
+
+        <svg id="rules" class="fill-red" height="150" width="400">
+            <text x="0" y="100" textLength="400" style="font-size: 128px">Rules</text>
+        </svg>
+
+        <div class="circle" id="rules-circle"></div>
+        <div class="circle" id="rules-circle2"></div>
+
+        <div class="rules-text o">
+            <p><strong>How to win :</strong> win</p>
+            <p><strong>Rules :</strong> click on the button.</p>
+            <p>I don't know what to add.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <p>Etiam molestie sed risus eu efficitur.</p>
+            <p>Thanks and good luck.</p>
+        </div>
+
+        <button class="full-btn o" id="to-battle">Next</button>
+
+    </section>
+
+    <section>
+
+        <div id="player">
+            <div class="life">
+                <img src="Assets/img/heart/heart.png" alt="heart" class="heart">
+                <img src="Assets/img/heart/heart.png" alt="heart" class="heart">
+                <img src="Assets/img/heart/heart.png" alt="heart" class="heart">
+            </div>
+            <img class="sprite" src="Assets/img/knight1/Knight_03__IDLE_000.png" alt="Player Knight">
+            <p class="name">YOU</p>
+        </div>
+
+        <div id="enemy">
+            <div class="life">
+                <img src="Assets/img/heart/heart.png" alt="heart" class="heart">
+                <img src="Assets/img/heart/heart.png" alt="heart" class="heart">
+                <img src="Assets/img/heart/heart.png" alt="heart" class="heart">
+            </div>
+            <img class="sprite" src="Assets/img/knight2/Knight_01__IDLE_000.png" alt="Enemy Knight">
+            <p class="name">ENEMY</p>
+        </div>
+
+        <div class="ground"></div>
+
+    </section>
+
+    <section>
+
+    </section>
+
+</body>
+<script src="Assets/js/controller.js"></script>
+
+</html>

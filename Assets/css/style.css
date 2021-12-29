@@ -1,0 +1,283 @@
+:root{
+    --squada: 'Squada One', sans-serif;
+    --montserrat: 'Montserrat', sans-serif;
+
+    --blue: 69, 101, 173;
+    --red: 203, 7, 103;
+    --dark: 60, 60, 59;
+    --bkg: 39, 39, 39;
+}
+
+body{
+    background-color: rgb(var(--bkg));
+    /* overflow-y: hidden; */
+    scroll-behavior: smooth;
+    color: #FFF;
+    font-family: var(--montserrat);
+}
+
+.montserrat{
+    font-family: var(--montserrat);
+}
+
+.squada{
+    font-family: var(--montserrat);
+}
+
+section{
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+}
+
+h1{
+    font-family: var(--squada);
+    position: relative;
+    color: #FFF;
+    font-size: clamp(28px, 10vw, 128px);
+    letter-spacing: 3px;
+    text-shadow: 0px -8px 20px rgb(var(--blue));
+}
+
+button{
+    all: unset;
+}
+
+strong{
+    font-weight: bold;
+}
+
+.full-btn{
+    background-color: #FFF;
+    padding: 1em 2em;
+    color: rgb(var(--dark));
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    position: relative;
+    box-shadow: 0px 0px 12px 1px rgb(var(--blue));
+    transition: .35s ease;
+    z-index: 1;
+}
+
+.full-btn:hover{
+    color: #FFF;
+}
+
+.full-btn:hover:after{
+    transform: scaleX(1);
+}
+
+.full-btn::after{
+    content: "";
+    display: block;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform-origin: left;
+    transform: scaleX(0);
+    background-color: rgb(var(--blue));
+    transition: .35s ease;
+    z-index: -1;
+}
+
+.circle{
+    border-radius: 50%;
+    background: linear-gradient(333deg, rgba(203,7,103,1) 0%, rgba(69,101,173,1) 100%);
+    animation: float 5s ease infinite;
+    position: absolute;
+}
+
+.coin{
+    position: relative;
+}
+
+.coin .frame{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.coin .frame{
+    display: none;
+}
+
+.coin .frame.v{
+    display: block;
+}
+
+.fill-red{
+    fill: none;
+    stroke: #FFF;
+    stroke-width: 2px;
+    font-family: var(--squada);
+    filter: drop-shadow(0px -3px 6px rgb(var(--red)));
+    text-transform: uppercase;
+}
+
+.o{
+    opacity: 0;
+}
+
+/* 1st Section */
+
+section:first-of-type{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#insertCoin{
+    margin-top: 2em;
+    font-family: var(--squada);
+    text-transform: uppercase;
+    color: #FFF;
+    font-size: 1.5em;
+    cursor: pointer;
+    animation: blink 1s linear infinite;
+}
+
+#homeCircle{
+    width: 300px;
+    height: 300px;
+    opacity: .4;
+    left: 6%;
+    bottom: 8%;
+}
+
+#dropCoin{
+    position: absolute;
+    right: 10vw;
+    top: 10vh;
+    height: 80vh;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+}
+
+#homeCoin{
+    position: absolute;
+    top: 0;
+    cursor: pointer;
+    z-index: 2;
+}
+
+#homeFente{
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+#homeCoin .frame{
+    transform-origin: left top;
+    transform: scale(0.5) translateX(-50%);
+}
+
+/* 2nd section */
+
+section:nth-of-type(2){
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    padding: 10em 0;
+    height: calc(100vh - 20em);
+}
+
+#rules{
+    stroke-dasharray: 500;
+    stroke-dashoffset: 500;
+}
+
+.rules-text{
+    transition: .35s ease;
+}
+
+#rules-circle{
+    left: 75px;
+    top: 75px;
+    width: 100px;
+    height: 100px;
+    opacity: .6;
+    animation-delay: 1.3s;
+}
+
+#rules-circle2{
+    right: 50px;
+    bottom: 50px;
+    opacity: .2;
+    width: 250px;
+    height: 250px;
+}
+
+/* 3rd section */
+
+#player, #enemy{
+    bottom: 15vh;
+    position: absolute;
+    /* border: 1px solid red;  */
+    width: 20px;
+    height: 20px;
+}
+
+#player .heart, #enemy .heart{
+    width: 50px;
+}
+
+#player .sprite, #enemy .sprite{
+    width: 70vw;
+    position: absolute;
+    bottom: 0;
+}
+
+
+#player{
+    left: 20vw;
+}
+
+#enemy{
+    right: 20vw;
+}
+
+#player .sprite{
+    transform: translate(-50%, 32%);
+}
+
+#enemy .sprite{
+    transform: scaleX(-1) translate(45%, 32%);
+}
+
+.name{
+    bottom: -5vh;
+    left: 0;
+    position: absolute;
+}
+
+
+.life{
+    display: flex;
+    position: absolute;
+    bottom: -15vh;
+    left: 0;
+    transform: translate(-50%);
+}
+
+.ground{
+    width: 70vw;
+    height: 2px;
+    display: block;
+    background-color: #FFF;
+    position: absolute;
+    left: 15vw;
+    bottom: 15vh;
+    box-shadow: 0px 1px 22px 2px rgb(var(--red));
+}
+
