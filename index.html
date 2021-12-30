@@ -63,6 +63,12 @@
 
     <section>
 
+        <div class="action">
+            <button class="stroke-btn" id="attack-btn">ATTACK (WIP)</button>
+            <button class="stroke-btn" id="attack-btn">HEAL (WIP)</button>
+            <button class="stroke-btn" id="skip-btn">SKIP</button>
+        </div>
+
         <div id="player">
             <div class="life">
                 <img src="Assets/img/heart/heart.png" alt="heart" class="heart">
@@ -89,9 +95,14 @@
 
     <section>
 
+        <svg id="result" class="fill-red" height="150" width="350">
+            <text x="0" y="100" textLength="350" style="font-size: 128px">WINNER</text>
+        </svg>
+
     </section>
 
 </body>
+<script src="Assets/js/game_controller.js"></script>
 <script src="Assets/js/controller.js"></script>
 
 </html>

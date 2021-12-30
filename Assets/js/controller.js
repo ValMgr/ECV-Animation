@@ -55,7 +55,6 @@ function otherAnim(img, player, ACTION){ // ACTION => ATTACK, HURT, JUMP, DIE
     }
     if(ACTION !== 'DIE') setTimeout(() => {img.setAttribute('src', `${DIRECTORY}/${SLUG}__IDLE_000.png`)}, 1000); // reset inital position 
 }
-
 // end knights sprites
 
 // coin sprite
@@ -109,6 +108,7 @@ docReady(() => {
         document.querySelector('#insertCoin').addEventListener('click', insertCoin);
         document.querySelector('#homeCoin').addEventListener('click', insertCoin);
         document.querySelector('#to-battle').addEventListener('click', toBattle);
+        document.querySelector('#skip-btn').addEventListener('click', endBattle)
     }
 
     let STEP = 0;
@@ -154,9 +154,15 @@ docReady(() => {
     }
 
 
-
-    // Game logic
-
+    function endBattle(){
+        scrollNextFrame(() => {
+            const resultEl = document.querySelector('#result');
+            const rdm = Math.floor(Math.random() * 2); // temp
+            const result = rdm ? 'Winner' : 'Looser';
+            resultEl.children[0].innerHTML = result;
+            resultEl.animate([{strokeDashoffset: 0}],{duration: 1500, fill: 'forwards', easing: 'ease-in'});
+        });
+    }
 
 
 });

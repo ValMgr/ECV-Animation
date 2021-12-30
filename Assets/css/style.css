@@ -47,6 +47,21 @@ strong{
     font-weight: bold;
 }
 
+.stroke-btn{
+    border: 2px solid #FFF;
+    background-color: transparent;
+    padding: 1em 2em;
+    box-shadow: 0px 0px 12px 1px rgb(var(--blue));
+    transition: .35s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.stroke-btn:hover{
+    box-shadow: 0px 0px 12px 1px rgb(var(--red));
+    border: 2px solid rgb(var(--red));
+}
+
 .full-btn{
     background-color: #FFF;
     padding: 1em 2em;
@@ -64,11 +79,11 @@ strong{
     color: #FFF;
 }
 
-.full-btn:hover:after{
+.full-btn:hover:after, .stroke-btn:hover:after{
     transform: scaleX(1);
 }
 
-.full-btn::after{
+.full-btn::after, .stroke-btn::after{
     content: "";
     display: block;
     height: 100%;
@@ -81,6 +96,10 @@ strong{
     background-color: rgb(var(--blue));
     transition: .35s ease;
     z-index: -1;
+}
+
+.stroke-btn:hover:after{
+    background-color: rgb(var(--red));
 }
 
 .circle{
@@ -221,16 +240,13 @@ section:nth-of-type(2){
 /* 3rd section */
 
 #player, #enemy{
-    bottom: 15vh;
+    bottom: 20vh;
     position: absolute;
     /* border: 1px solid red;  */
     width: 20px;
     height: 20px;
 }
 
-#player .heart, #enemy .heart{
-    width: 50px;
-}
 
 #player .sprite, #enemy .sprite{
     width: 70vw;
@@ -270,6 +286,20 @@ section:nth-of-type(2){
     transform: translate(-50%);
 }
 
+
+#player .heart, #enemy .heart{
+    width: 30px;
+}
+
+.action{
+    display: flex;
+    justify-content: space-around;
+    width: 60%;
+    position: absolute;
+    left: 25%;
+    top: 15vh;
+}
+
 .ground{
     width: 70vw;
     height: 2px;
@@ -277,7 +307,20 @@ section:nth-of-type(2){
     background-color: #FFF;
     position: absolute;
     left: 15vw;
-    bottom: 15vh;
+    bottom: 20vh;
     box-shadow: 0px 1px 22px 2px rgb(var(--red));
 }
 
+/* 4rd section */
+
+section:last-of-type{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#result{
+    stroke-dashoffset: 700;
+    stroke-dasharray: 700;
+}
