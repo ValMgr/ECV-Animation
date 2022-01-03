@@ -30,34 +30,6 @@ function scrollNextFrame(fn){
     _ScrollTo(0, target, fn);
 }
 
-
-// knights Sprites animations
-const DIRECTORY = 'Assets/img';
-const P_SLUG = 'knight1/Knight_03';
-const E_SLUG = 'knight2/Knight_01';
-const ANIM_FRAMES = 10; // Frames number for each animation
-
-function idleAnim(img, player){
-    const ACTION = 'IDLE';
-    const SLUG = player ? P_SLUG : E_SLUG;
-    let i = 0;
-    
-    return setInterval(() => {
-        i = nextIterator(i, ANIM_FRAMES);
-        img.setAttribute('src', `${DIRECTORY}/${SLUG}__${ACTION}_00${i}.png`);
-    }, 100);
-}
-
-function otherAnim(img, player, ACTION){ // ACTION => ATTACK, HURT, JUMP, DIE
-    const SLUG = player ? P_SLUG : E_SLUG;    
-    for(let i = 0; i < ANIM_FRAMES; i++){
-        setTimeout(() => {img.setAttribute('src', `${DIRECTORY}/${SLUG}__${ACTION}_00${i}.png`)}, 100*i);
-    }
-    if(ACTION !== 'DIE') setTimeout(() => {img.setAttribute('src', `${DIRECTORY}/${SLUG}__IDLE_000.png`)}, 1000); // reset inital position 
-}
-// end knights sprites
-
-// coin sprite
 function createCoinObserver(){
     let animation = null;
     return new IntersectionObserver((entries, observer) => {
@@ -76,11 +48,41 @@ function coinAnimation(coin){
     let i = 0;
     const frames = Array.from(coin.children);
     frames.forEach((f, i) => i ? f.classList.remove('v') : f.classList.add('v'));
-    return setInterval(() => {
+    return setInterval(() => {  
         frames[i].classList.remove('v');
         i = nextIterator(i, frames.length);
         frames[i].classList.add('v');
     }, 200);
+}
+
+function createGroundObserver(){
+    let anim = null;
+    return new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting){
+                anim = rainbowGround();
+            }
+            else{
+                clearInterval(anim);
+            }
+        });
+    },{threshold: 0.1})
+}
+
+function rainbowGround(){
+    const ground = document.querySelector('.ground');
+    return setInterval(() => {
+        const initalColor = getComputedStyle(ground).getPropertyValue('--groundShadow').match(/(\d+)/g);
+        const nextColor = getColor(initalColor[0], initalColor[1], initalColor[2]);
+        ground.style.setProperty('--groundShadow', nextColor);
+    }, 500);
+}
+
+function getColor(r, g, b){
+    const red = Math.floor(Math.random() * 255);
+    const green = Math.floor(Math.random() * 255);
+    const blue = Math.floor(Math.random() * 255);
+    return `rgb(${red}, ${green}, ${blue})`;
 }
 
 function nextIterator(i, l){
@@ -91,24 +93,24 @@ function nextIterator(i, l){
         return 0;
     }
 }
-// end coin sprite
 
 docReady(() => {
 
     initListener();
-    // _ScrollTo(0, 0);
+    _ScrollTo(0, 0);
 
     const coins = document.querySelectorAll('.coin');
     const coinObserver = createCoinObserver();
     coins.forEach(c => coinObserver.observe(c));
     const player = document.querySelector('#player');
     const enemy = document.querySelector('#enemy');
+    const groundObserver = createGroundObserver();
+    groundObserver.observe(document.querySelector('.ground'));
 
     function initListener(){
         document.querySelector('#insertCoin').addEventListener('click', insertCoin);
         document.querySelector('#homeCoin').addEventListener('click', insertCoin);
         document.querySelector('#to-battle').addEventListener('click', toBattle);
-        document.querySelector('#skip-btn').addEventListener('click', endBattle)
     }
 
     let STEP = 0;
@@ -141,28 +143,21 @@ docReady(() => {
 
     function toBattle(){
         if(STEP === 1){
-            scrollNextFrame(iddleFight);
+            scrollNextFrame(() => {
+                gameManager(player, enemy, endBattle);
+            });
             STEP = 2;
         }
     }
 
-    function iddleFight(){
-        const pImg = player.querySelector('.sprite');
-        const eImg = enemy.querySelector('.sprite');
-        let pAnim = idleAnim(pImg, true);
-        let eAnim = idleAnim(eImg, false);
-    }
-
-
-    function endBattle(){
-        scrollNextFrame(() => {
+    function endBattle(isWin){
+        if(STEP === 2){
             const resultEl = document.querySelector('#result');
-            const rdm = Math.floor(Math.random() * 2); // temp
-            const result = rdm ? 'Winner' : 'Looser';
+            const result = isWin ? 'Winner' : 'Looser';
             resultEl.children[0].innerHTML = result;
             resultEl.animate([{strokeDashoffset: 0}],{duration: 1500, fill: 'forwards', easing: 'ease-in'});
-        });
+            STEP = 3;
+        }
     }
-
 
 });

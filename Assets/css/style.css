@@ -11,6 +11,7 @@
 body{
     background-color: rgb(var(--bkg));
     /* overflow-y: hidden; */
+    overflow-x: hidden;
     scroll-behavior: smooth;
     color: #FFF;
     font-family: var(--montserrat);
@@ -104,9 +105,14 @@ strong{
 
 .circle{
     border-radius: 50%;
-    background: linear-gradient(333deg, rgba(203,7,103,1) 0%, rgba(69,101,173,1) 100%);
+    background: linear-gradient(333deg, rgba(var(--red),1) 20%, rgba(var(--blue),1) 100%);
+    filter: drop-shadow(0px -3px 6px rgb(var(--blue)));
     animation: float 5s ease infinite;
     position: absolute;
+}
+
+.circle:nth-of-type(even){
+    filter: drop-shadow(0px -3px 6px rgb(var(--red)));
 }
 
 .coin{
@@ -239,6 +245,18 @@ section:nth-of-type(2){
 
 /* 3rd section */
 
+section:last-of-type{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#result{
+    stroke-dashoffset: 700;
+    stroke-dasharray: 700;
+}
+
 #player, #enemy{
     bottom: 20vh;
     position: absolute;
@@ -265,10 +283,12 @@ section:nth-of-type(2){
 
 #player .sprite{
     transform: translate(-50%, 32%);
+    filter: drop-shadow(0px -3px 6px rgb(var(--blue)));
 }
 
 #enemy .sprite{
     transform: scaleX(-1) translate(45%, 32%);
+    filter: drop-shadow(0px -3px 6px rgb(var(--red)));
 }
 
 .name{
@@ -291,16 +311,29 @@ section:nth-of-type(2){
     width: 30px;
 }
 
+#player .heart{
+    filter: drop-shadow(0px -3px 6px rgb(var(--blue)));
+}
+
+#enemy .heart{
+    filter: drop-shadow(0px -3px 6px rgb(var(--red)));
+}
+
+.heart.hidden{
+    display: none;
+}
+
 .action{
     display: flex;
     justify-content: space-around;
-    width: 60%;
+    width: 50%;
     position: absolute;
     left: 25%;
     top: 15vh;
 }
 
 .ground{
+    --groundShadow: rgb(0, 0, 0);
     width: 70vw;
     height: 2px;
     display: block;
@@ -308,19 +341,15 @@ section:nth-of-type(2){
     position: absolute;
     left: 15vw;
     bottom: 20vh;
-    box-shadow: 0px 1px 22px 2px rgb(var(--red));
+    box-shadow: 0px 1px 22px 2px var(--groundShadow);
+    transition: .35s ease;
 }
 
-/* 4rd section */
-
-section:last-of-type{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-#result{
-    stroke-dashoffset: 700;
-    stroke-dasharray: 700;
+.broadcast{
+    top: -25vh;
+    position: absolute;
+    transition: .5s ease;
+    font-weight: bold;
+    font-size: 1.2em;
+    animation: fadeOut 1s ease-in;
 }
